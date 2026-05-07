@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Sidai Furnished Homes</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    /* Header */
+       .header {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));
+      padding: 22px 0;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header img {
+      max-width: 110px;
+      height: auto;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      margin: 0 auto 20px auto;
+      max-width: 1100px;
+      background: rgba(20, 30, 55, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: #f5f7ff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 999px;
+    }
+
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .navbar a.active {
+      background: linear-gradient(135deg, #ff9d2b, #ff6b35);
+      box-shadow: 0 18px 35px rgba(255, 107, 53, 0.25);
+      color: #fff;
+    }
+
+    .navbar a.cta {
+      background: linear-gradient(135deg, #4a90e2, #5fc3ff);
+      color: #fff;
+      box-shadow: 0 12px 25px rgba(74, 144, 226, 0.25);
+    }
+
+    .navbar a.cta:hover {
+      background: linear-gradient(135deg, #5fc3ff, #4a90e2);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6b35;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      padding: 15px 40px;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Sections */
+    .section {
+      background: rgba(255, 255, 255, 0.95);
+      margin: 30px 0;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      color: #ff6b35;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .section p {
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card h3 {
+      color: #ff6b35;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .service-card .price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #f7931e;
+      margin: 15px 0;
+    }
+
+    .service-card ul {
+      list-style: none;
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .service-card li {
+      margin: 8px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .service-card li::before {
+      content: '✓';
+      color: #ff6b35;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Amenities Grid */
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .amenity-item i {
+      color: #ff6b35;
+      font-size: 1.5rem;
+      margin-right: 15px;
+      width: 30px;
+    }
+
+    /* Slideshow */
+    .slideshow {
+      position: relative;
+      max-width: 100%;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .slide-overlay h3 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .slide-overlay p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .slideshow-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .slideshow-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      color: #ff6b35;
+      font-size: 2rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .slideshow-btn:hover {
+      background: white;
+      transform: scale(1.1);
+    }
+
+    .slideshow-dots {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .dot.active {
+      background: #ff6b35;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .amenities-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      .navbar a {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="logo.png" alt="Sidai Furnished Homes Logo" />
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="contact.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold;">📅 Book Now</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Our Services</h1>
+    <p>Discover the perfect furnished accommodation for your stay in Nairobi</p>
+    <a href="contact.html" class="cta-button">Book Now</a>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Accommodation Types -->
+    <section class="section">
+      <h2>Accommodation Options</h2>
+      <p>Choose from our range of beautifully furnished apartments, each designed to provide comfort, convenience, and a home-away-from-home experience.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Studio Apartments</h3>
+          <p>Perfect for solo travelers or couples seeking a compact yet comfortable space.</p>
+          <div class="price">From KSh 6,000/night</div>
+          <ul>
+            <li>Fully furnished living area</li>
+            <li>Modern kitchenette</li>
+            <li>Private bathroom</li>
+            <li>Work desk and Wi-Fi</li>
+            <li>City views</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>1 Bedroom Apartments</h3>
+          <p>Ideal for professionals, small families, or extended stays with separate living and sleeping areas.</p>
+          <div class="price">From KSh 6,000/night</div>
+          <ul>
+            <li>Spacious bedroom with king/queen bed</li>
+            <li>Separate living room</li>
+            <li>Fully equipped kitchen</li>
+            <li>Private bathroom with shower</li>
+            <li>Balcony with city views</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>2 Bedroom Apartments</h3>
+          <p>Perfect for families or groups, offering ample space and privacy for everyone.</p>
+          <div class="price">From KSh 8,000/night</div>
+          <ul>
+            <li>Two comfortable bedrooms</li>
+            <li>Large living and dining area</li>
+            <li>Full kitchen with appliances</li>
+            <li>Two bathrooms</li>
+            <li>Panoramic balcony views</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Property Showcase Slideshow -->
+    <section class="section">
+      <h2>Experience Luxury Living</h2>
+      <p>Take a virtual tour of our beautifully furnished apartments</p>
+
+      <div class="slideshow" id="propertySlideshow">
+        <div class="slide active">
+          <img src="IMG-20260331-WA0137 - Copy.jpg" alt="Modern Living Room">
+          <div class="slide-overlay">
+            <h3>Luxurious Living Spaces</h3>
+            <p>Contemporary furniture and elegant design</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="bed2.jpg" alt="Comfortable Bedroom">
+          <div class="slide-overlay">
+            <h3>Comfortable Bedrooms</h3>
+            <p>Restful spaces designed for ultimate relaxation</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="IMG-20260331-WA0140 - Copy.jpg" alt="Modern Kitchen">
+          <div class="slide-overlay">
+            <h3>Fully Equipped Kitchens</h3>
+            <p>Everything you need to prepare delicious meals</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="skyview.jpg" alt="City View Balcony">
+          <div class="slide-overlay">
+            <h3>Stunning City Views</h3>
+            <p>Panoramic balconies overlooking Nairobi's skyline</p>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="bathroom.jpg" alt="Luxury Bathroom">
+          <div class="slide-overlay">
+            <h3>Modern Bathrooms</h3>
+            <p>Spa-like bathrooms for your comfort</p>
+          </div>
+        </div>
+
+        <div class="slideshow-controls">
+          <button class="slideshow-btn" id="prevBtn">❮</button>
+          <button class="slideshow-btn" id="nextBtn">❯</button>
+        </div>
+        <div class="slideshow-dots" id="slideshowDots"></div>
+      </div>
+    </section>
+
+    <!-- Amenities & Services -->
+    <section class="section">
+      <h2>Amenities & Services</h2>
+      <p>Enjoy world-class facilities and services designed to make your stay memorable.</p>
+
+      <div class="amenities-grid">
+        <div class="amenity-item">
+          <i>📶</i>
+          <div>
+            <strong>High-Speed Wi-Fi</strong><br>
+            <span>Fast, reliable internet throughout the property</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🅿️</i>
+          <div>
+            <strong>Free Parking</strong><br>
+            <span>Secure basement  parking spaces for all residents</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>📺</i>
+          <div>
+            <strong>Smart TV</strong><br>
+            <span>Entertainment systems in all apartments</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🔒</i>
+          <div>
+            <strong>24/7 Security</strong><br>
+            <span>CCTV surveillance and security personnel</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🍽️</i>
+          <div>
+            <strong>On-Site Restaurant</strong><br>
+            <span>Fine dining with experienced chefs to spice your stay</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🏋️</i>
+          <div>
+            <strong>Fitness Center</strong><br>
+            <span>Modern gym equipment and facilities for keeping good physique</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🛒</i>
+          <div>
+            <strong>Convenient Shopping</strong><br>
+            <span>Adjacent to malls</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🧒</i>
+          <div>
+            <strong>Kids Play Area</strong><br>
+            <span>Safe and fun environment for children</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>🛗</i>
+          <div>
+            <strong>Accessible Lifts</strong><br>
+            <span>Modern elevators for easy access</span>
+          </div>
+        </div>
+        <div class="amenity-item">
+          <i>📍</i>
+          <div>
+            <strong>Prime Location</strong><br>
+            <span>Kilimani, Wood Avenue behind Yaya Centre, adjacent to Adlife Mall 10 min drive to CBD and 8 min drive to Nairobi National Park
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section">
+      <h2>Why Choose Sidai Furnished Homes?</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+        <div style="text-align: center;">
+          <h3 style="color: #ff6b35; margin-bottom: 15px;">Prime Location</h3>
+          <p>Located just minutes from Nairobi's Central Business District, with easy access to shopping, dining, and entertainment.</p>
+        </div>
+        <div style="text-align: center;">
+          <h3 style="color: #ff6b35; margin-bottom: 15px;">Affordable Luxury</h3>
+          <p>Experience high-end furnished accommodations at competitive prices, making luxury accessible to all.</p>
+        </div>
+        <div style="text-align: center;">
+          <h3 style="color: #ff6b35; margin-bottom: 15px;">Modern Amenities</h3>
+          <p>Enjoy contemporary furnishings, smart technology, and world-class facilities designed for your comfort.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="text-align: center; background: linear-gradient(135deg, #ff6b35, #f7931e); color: white;">
+      <h2 style="color: white;">Ready to Experience Luxury Living?</h2>
+      <p style="color: rgba(255,255,255,0.9);">Book your perfect stay today and discover why Sidai Furnished Homes is Nairobi's premier choice.</p>
+      <a href="contact.html" class="cta-button" style="margin-top: 30px; background: white; color: #ff6b35;">Make a Reservation</a>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025-2026 Sidai Furnished Homes - Sophisticated stays, warm embrace. | perezdevelops
+  </footer>
+
+  <script>
+    // Slideshow functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('slideshowDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      updateSlides();
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Auto-play
+    setInterval(nextSlide, 5000);
+
+    // Initialize
+    updateSlides();
+  </script>
+</body>
+</html>

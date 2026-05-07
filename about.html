@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Sidai Furnished Homes - Our Story & Values</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: url('background.jpg') center/cover fixed no-repeat;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+      z-index: -1;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .header img {
+      max-width: 120px;
+      height: auto;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .header img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      margin: 0 auto 20px auto;
+      max-width: 1100px;
+      background: rgba(20, 30, 55, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: #f5f7ff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 999px;
+    }
+
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .navbar a.active {
+      background: linear-gradient(135deg, #ff9d2b, #ff6b35);
+      box-shadow: 0 18px 35px rgba(255, 107, 53, 0.25);
+      color: #fff;
+    }
+
+    .navbar a.cta {
+      background: linear-gradient(135deg, #4a90e2, #5fc3ff);
+      color: #fff;
+      box-shadow: 0 12px 25px rgba(74, 144, 226, 0.25);
+    }
+
+    .navbar a.cta:hover {
+      background: linear-gradient(135deg, #5fc3ff, #4a90e2);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px);
+      color: white;
+      padding: 120px 20px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('IMG-20260331-WA0142.jpg') center/cover no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 25px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      line-height: 1.1;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      letter-spacing: 0.01em;
+      opacity: 0.95;
+      line-height: 1.6;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Section */
+    .section {
+      margin: 80px 0;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 60px;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border-radius: 2px;
+    }
+
+    /* Mission & Vision Cards */
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .vision-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      animation: slideInLeft 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-card:nth-child(2) {
+      animation: slideInRight 1s ease-out;
+    }
+
+    .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+    }
+
+    .vision-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .vision-card h3 {
+      font-size: 1.8rem;
+      color: #ff6b35;
+      margin-bottom: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vision-card p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* About Content */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .about-text {
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .about-text h3 {
+      font-size: 2.2rem;
+      color: white;
+      margin-bottom: 25px;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-text p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-image {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: slideInRight 1s ease-out;
+      transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+      transform: scale(1.02);
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-box:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-box h4 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .feature-box p {
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin: 80px 0;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .stats h2 {
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 50px;
+      font-weight: 800;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .stat {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #ff6b35;
+      margin-bottom: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: #4a5568;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .value-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .value-card h4 {
+      font-size: 1.6rem;
+      color: #ff6b35;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 800;
+    }
+
+    .value-card p {
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      padding: 60px 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin: 80px 0;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      color: #4a5568;
+      margin-bottom: 30px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 18px 45px;
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+      background: linear-gradient(135deg, #f7931e, #ff6b35);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      color: white;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-size: 1.05rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .about-text h3 {
+        font-size: 1.6rem;
+      }
+
+      .mission-vision {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .stat {
+        font-size: 2rem;
+      }
+
+      .navbar {
+        flex-direction: column;
+      }
+
+      .navbar a {
+        width: 100%;
+      }
+
+      .cta-section h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .navbar a {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+        margin: 4px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-box {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="logo.png" alt="Sidai Furnished Homes Logo" />
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="contact.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold;">📅 Book Now</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Our Story</h1>
+    <p>Discover the journey behind Sidai Furnished Homes</p>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Mission & Vision Section -->
+    <section class="section">
+      <h2 class="section-title">Our Vision & Mission</h2>
+      <div class="mission-vision">
+        <div class="vision-card">
+          <h3>🎯 Our Vision</h3>
+          <p>To be the premier destination for sophisticated, comfortable, and affordable furnished homes in the region. We envision creating spaces where guests feel welcomed, valued, and at home.</p>
+        </div>
+        <div class="vision-card">
+          <h3>💼 Our Mission</h3>
+          <p>To provide elegant, modern, and fully-equipped furnished accommodations that combine luxury with warmth. We're committed to delivering exceptional hospitality, excellent service, and unforgettable experiences for every guest.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+      <h2 class="section-title">About Sidai Furnished Homes</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Your Perfect Home Away From Home</h3>
+          <p>At Sidai Furnished Homes, we're delighted to exceed all your accommodation needs with our modern, tastefully furnished residences. We understand that whether you're visiting for business, leisure, or a prolonged stay, you deserve spaces that inspire comfort and confidence.</p>
+          <p>Our carefully curated collection ranges from intimate studios to spacious 2-bedroom units, each designed with meticulous attention to detail and equipped with contemporary amenities to ensure your stay is both luxurious and convenient.</p>
+          <p>With a strategic location just minutes away from the CBD and surrounded by essential services, Sidai Furnished Homes is your gateway to experiencing the best of both comfort and accessibility.</p>
+        </div>
+        <img src="IMG-20260331-WA0140 - Copy.jpg" alt="Sidai Furnished Homes" class="about-image">
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section">
+      <h2 class="section-title">Why Choose Sidai?</h2>
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🏠</div>
+          <h4>Modern Design</h4>
+          <p>Stylishly furnished with contemporary décor and high-quality furnishings that reflect sophistication and comfort.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📺</div>
+          <h4>Premium Amenities</h4>
+          <p>Smart TVs, fast Wi-Fi, well-equipped kitchens, and thoughtfully designed living spaces for your convenience.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🔒</div>
+          <h4>24/7 Security</h4>
+          <p>CCTV surveillance in all public areas and dedicated security personnel ensuring your safety and peace of mind.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🍽️</div>
+          <h4>Dining Excellence</h4>
+          <p>On-site restaurant with experienced chefs serving delicious cuisines to satisfy your culinary desires.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🚗</div>
+          <h4>Free Parking</h4>
+          <p>Ample parking space available for all guests with convenient access to your accommodation units.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">⛩️</div>
+          <h4>Family Friendly</h4>
+          <p>Kids play area, accessible lifts, and convenient proximity to shops and entertainment options.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <h2 style="font-size: 2.5rem; margin-bottom: 10px; font-weight: 800;">By The Numbers</h2>
+      <div class="stats-grid">
+        <div>
+          <div class="stat">50+</div>
+          <div class="stat-label">Happy Guests</div>
+        </div>
+        <div>
+          <div class="stat">10+</div>
+          <div class="stat-label">Units Available</div>
+        </div>
+        <div>
+          <div class="stat">24/7</div>
+          <div class="stat-label">Support</div>
+        </div>
+        <div>
+          <div class="stat">5 ⭐</div>
+          <div class="stat-label">Rating</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="section">
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <h4>Integrity</h4>
+          <p>We conduct our business with honesty, transparency, and unwavering commitment to our guests and team members.</p>
+        </div>
+        <div class="value-card">
+          <h4>Excellence</h4>
+          <p>We strive for the highest standards in every aspect of our service, from housekeeping to guest relations.</p>
+        </div>
+        <div class="value-card">
+          <h4>Hospitality</h4>
+          <p>Warm welcomes and genuine care define our approach. Your satisfaction is our ultimate achievement.</p>
+        </div>
+        <div class="value-card">
+          <h4>Innovation</h4>
+          <p>We continuously improve our facilities and services to meet the evolving needs of modern travelers and residents.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>Ready to Experience Sidai?</h2>
+      <p>Book your stay today and discover the perfect blend of sophistication and warmth</p>
+      <a href="contact.html" class="cta-button">Book Your Stay Now</a>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025-2026 Sidai Furnished Homes - Sophisticated stays, warm embrace. | perezdevelops
+  </footer>
+</body>
+</html>
+

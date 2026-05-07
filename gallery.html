@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Sidai Furnished Homes</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95));
+      padding: 22px 0;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header img {
+      max-width: 110px;
+      height: auto;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      margin: 0 auto 20px auto;
+      max-width: 1100px;
+      background: rgba(20, 30, 55, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: #f5f7ff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 999px;
+    }
+
+    .navbar a:hover::before {
+      opacity: 1;
+    }
+
+    .navbar a:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .navbar a.active {
+      background: linear-gradient(135deg, #ff9d2b, #ff6b35);
+      box-shadow: 0 18px 35px rgba(255, 107, 53, 0.25);
+      color: #fff;
+    }
+
+    .navbar a.cta {
+      background: linear-gradient(135deg, #4a90e2, #5fc3ff);
+      color: #fff;
+      box-shadow: 0 12px 25px rgba(74, 144, 226, 0.25);
+    }
+
+    .navbar a.cta:hover {
+      background: linear-gradient(135deg, #5fc3ff, #4a90e2);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6b35;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    /* Gallery Container */
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Main Slideshow */
+    .main-slideshow {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      margin: 40px 0;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .slide-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .slide-info h3 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .slide-info p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    /* Navigation Controls */
+    .slideshow-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .control-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      color: #ff6b35;
+      font-size: 2.5rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .control-btn:hover {
+      background: white;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .control-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Dots Navigation */
+    .dots-container {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .dot.active {
+      background: #ff6b35;
+      border-color: white;
+      transform: scale(1.2);
+    }
+
+    .dot:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+
+    /* Thumbnail Grid */
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 40px 0;
+    }
+
+    .thumbnail {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .thumbnail:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .thumbnail:hover img {
+      transform: scale(1.05);
+    }
+
+    .thumbnail-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: white;
+      padding: 15px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .thumbnail:hover .thumbnail-overlay {
+      opacity: 1;
+    }
+
+    .thumbnail-overlay h4 {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    /* Gallery Stats */
+    .gallery-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff6b35;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-slideshow {
+        height: 400px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .slide-info h3 {
+        font-size: 1.8rem;
+      }
+
+      .thumbnail-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #ff6b35;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Header with Logo -->
+  <div class="header">
+    <img src="logo.png" alt="Sidai Furnished Homes Logo" />
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="contact.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold;">📅 Book Now</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Our Gallery</h1>
+    <p>Explore the beauty and comfort of our furnished apartments</p>
+  </section>
+
+  <!-- Gallery Container -->
+  <div class="gallery-container">
+    <!-- Gallery Stats -->
+    <div class="gallery-stats">
+      <div class="stat-item">
+        <div class="stat-number">25+</div>
+        <div class="stat-label">Beautiful Rooms</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Furnished & Ready</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Professional Service</div>
+      </div>
+    </div>
+
+    <!-- Main Slideshow -->
+    <div class="main-slideshow" id="mainSlideshow">
+      <div class="slide active">
+        <img src="siting.jpg" alt="Luxurious Living Room">
+        <div class="slide-info">
+          <h3>Luxurious Living Spaces</h3>
+          <p>Modern furnishings and elegant design for ultimate comfort</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="bed2.jpg" alt="Comfortable Bedroom">
+        <div class="slide-info">
+          <h3>Comfortable Bedrooms</h3>
+          <p>Restful spaces designed for peaceful sleep and relaxation</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="IMG-20260331-WA0140 - Copy.jpg" alt="Modern Kitchen">
+        <div class="slide-info">
+          <h3>Fully Equipped Kitchens</h3>
+          <p>Everything you need to prepare delicious meals at home</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="view.jpg" alt="City View Balcony">
+        <div class="slide-info">
+          <h3>Stunning City Views</h3>
+          <p>Panoramic balconies overlooking Nairobi's beautiful skyline</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="bathroom.jpg" alt="Luxury Bathroom">
+        <div class="slide-info">
+          <h3>Modern Bathrooms</h3>
+          <p>Spa-like bathrooms for your comfort and convenience</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="IMG-20260331-WA0136 - Copy.jpg" alt="Elegant Dining Area">
+        <div class="slide-info">
+          <h3>Elegant Dining Areas</h3>
+          <p>Perfect spaces for enjoying meals with family and friends</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="IMG-20260331-WA0141 - Copy.jpg" alt="Cozy Lounge">
+        <div class="slide-info">
+          <h3>Cozy Lounge Areas</h3>
+          <p>Relaxing spaces for unwinding after a long day</p>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="IMG-20260331-WA0153 - Copy.jpg" alt="Premium Amenities">
+        <div class="slide-info">
+          <h3>Premium Amenities</h3>
+          <p>World-class facilities designed for your comfort</p>
+        </div>
+      </div>
+
+      <!-- Navigation Controls -->
+      <div class="slideshow-controls">
+        <button class="control-btn" id="prevBtn">❮</button>
+        <button class="control-btn" id="nextBtn">❯</button>
+      </div>
+
+      <!-- Dots Navigation -->
+      <div class="dots-container" id="dotsContainer"></div>
+    </div>
+
+    <!-- Thumbnail Grid -->
+    <div class="thumbnail-grid">
+      <div class="thumbnail" data-slide="0">
+        <img src="IMG-20260331-WA0137 - Copy.jpg" alt="Living Room">
+        <div class="thumbnail-overlay">
+          <h4>Living Room</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="1">
+        <img src="bed2.jpg" alt="Bedroom">
+        <div class="thumbnail-overlay">
+          <h4>Bedroom</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="2">
+        <img src="IMG-20260331-WA0140 - Copy.jpg" alt="Kitchen">
+        <div class="thumbnail-overlay">
+          <h4>Kitchen</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="3">
+        <img src="skyview.jpg" alt="Balcony View">
+        <div class="thumbnail-overlay">
+          <h4>Balcony View</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="4">
+        <img src="bathroom.jpg" alt="Bathroom">
+        <div class="thumbnail-overlay">
+          <h4>Bathroom</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="5">
+        <img src="IMG-20260331-WA0136 - Copy.jpg" alt="Dining Area">
+        <div class="thumbnail-overlay">
+          <h4>Dining Area</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="6">
+        <img src="IMG-20260331-WA0141 - Copy.jpg" alt="Lounge">
+        <div class="thumbnail-overlay">
+          <h4>Lounge</h4>
+        </div>
+      </div>
+      <div class="thumbnail" data-slide="7">
+        <img src="IMG-20260331-WA0153 - Copy.jpg" alt="Amenities">
+        <div class="thumbnail-overlay">
+          <h4>Amenities</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0138 - Copy.jpg" alt="Room Interior">
+        <div class="thumbnail-overlay">
+          <h4>Room Interior</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0140 - Copy.jpg" alt="Modern Design">
+        <div class="thumbnail-overlay">
+          <h4>Modern Design</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0145 - Copy.jpg" alt="Comfort Zone">
+        <div class="thumbnail-overlay">
+          <h4>Comfort Zone</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0146 - Copy.jpg" alt="Living Space">
+        <div class="thumbnail-overlay">
+          <h4>Living Space</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0145 - Copy.jpg" alt="Elegant Room">
+        <div class="thumbnail-overlay">
+          <h4>Elegant Room</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0146 - Copy.jpg" alt="Cozy Corner">
+        <div class="thumbnail-overlay">
+          <h4>Cozy Corner</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0149 - Copy.jpg" alt="Premium Suite">
+        <div class="thumbnail-overlay">
+          <h4>Premium Suite</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0150 - Copy.jpg" alt="Luxury Living">
+        <div class="thumbnail-overlay">
+          <h4>Luxury Living</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0151 - Copy.jpg" alt="Modern Comfort">
+        <div class="thumbnail-overlay">
+          <h4>Modern Comfort</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0152 - Copy.jpg" alt="Stylish Interior">
+        <div class="thumbnail-overlay">
+          <h4>Stylish Interior</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0154 - Copy.jpg" alt="Home Away Home">
+        <div class="thumbnail-overlay">
+          <h4>Home Away Home</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0155 - Copy.jpg" alt="Relaxation Space">
+        <div class="thumbnail-overlay">
+          <h4>Relaxation Space</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0156 - Copy.jpg" alt="Quality Living">
+        <div class="thumbnail-overlay">
+          <h4>Quality Living</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="skyview.jpg" alt="Beautiful View">
+        <div class="thumbnail-overlay">
+          <h4>Beautiful View</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="siting.jpg" alt="Comfort First">
+        <div class="thumbnail-overlay">
+          <h4>Comfort First</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="siting.jpg" alt="Urban Luxury">
+        <div class="thumbnail-overlay">
+          <h4>Urban Luxury</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="sauna.jpg" alt="relaxation catered for">
+        <div class="thumbnail-overlay">
+          <h4>relaxion catered for</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0164 - Copy.jpg" alt="Perfect Stay">
+        <div class="thumbnail-overlay">
+          <h4>Perfect Stay</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="view.jpg" alt="appealing designs">
+        <div class="thumbnail-overlay">
+          <h4>appealing designs</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0167 - Copy.jpg" alt="Home Comfort">
+        <div class="thumbnail-overlay">
+          <h4>Home Comfort</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0168 - Copy.jpg" alt="Quality Time">
+        <div class="thumbnail-overlay">
+          <h4>Quality Time</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0169 - Copy.jpg" alt="Peaceful Retreat">
+        <div class="thumbnail-overlay">
+          <h4>Peaceful Retreat</h4>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <img src="IMG-20260331-WA0170 - Copy.jpg" alt="Urban Paradise">
+        <div class="thumbnail-overlay">
+          <h4>Urban Paradise</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025-2026 Sidai Furnished Homes - Sophisticated stays, warm embrace. | perezdevelops
+  </footer>
+
+  <script>
+    // Loading screen
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading').classList.add('hidden');
+      }, 1000);
+    });
+
+    // Slideshow functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const thumbnails = document.querySelectorAll('.thumbnail[data-slide]');
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      updateSlides();
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Thumbnail click handlers
+    thumbnails.forEach((thumbnail, index) => {
+      thumbnail.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Auto-play
+    setInterval(nextSlide, 6000);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+      }
+    });
+
+    // Initialize
+    updateSlides();
+  </script>
+</body>
+</html>
