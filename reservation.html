@@ -1,295 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make a Reservation - Sidai Furnished Homes</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .required {
-            color: red;
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                margin: 20px;
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e8">
+  <meta name="description" content="Send an enquiry to Sidai Furnished Homes about a stay in Kilimani, Nairobi.">
+  <title>Make an enquiry | Sidai Furnished Homes</title>
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Make Your Reservation</h1>
-        
-        <div id="alert" class="alert"></div>
-
-        <form id="reservationForm" action="handle_reservation_simple.php" method="post">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="first_name">First Name <span class="required">*</span></label>
-                    <input type="text" id="first_name" name="first_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="last_name">Last Name <span class="required">*</span></label>
-                    <input type="text" id="last_name" name="last_name" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="check_in">Check-in Date <span class="required">*</span></label>
-                    <input type="date" id="check_in" name="check_in" required>
-                </div>
-                <div class="form-group">
-                    <label for="check_out">Check-out Date <span class="required">*</span></label>
-                    <input type="date" id="check_out" name="check_out" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="property_type">Room Type <span class="required">*</span></label>
-                    <select id="property_type" name="property_type" required>
-                        <option value="">Select a room</option>
-                        <option value="Studio">Studio</option>
-                        <option value="1 Bedroom">1 Bedroom</option>
-                        <option value="2 Bedroom">2 Bedroom</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="number_of_guests">Number of Guests <span class="required">*</span></label>
-                    <input type="number" id="number_of_guests" name="number_of_guests" min="1" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="special_requests">Special Requests</label>
-                <textarea id="special_requests" name="special_requests" placeholder="Any special requirements or requests?"></textarea>
-            </div>
-
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>Processing your reservation...</p>
-            </div>
-
-            <button type="submit">Submit Reservation</button>
-        </form>
+<body class="reservation-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Sidai Furnished Homes home">
+        <img src="logo.png" alt="">
+        <span class="brand-name">sidai<span>furnished homes</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="index.html#apartments">Apartments</a>
+        <a href="index.html#experience">The experience</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#location">Location</a>
+        <a class="nav-cta" href="reservation.html" aria-current="page">Enquire now <span aria-hidden="true">↗</span></a>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        const form = document.getElementById('reservationForm');
-        const alert = document.getElementById('alert');
-        const loading = document.getElementById('loading');
+  <main class="reservation-main page-width" id="main">
+    <div class="reservation-layout">
+      <section class="reservation-intro">
+        <span class="eyebrow">LET'S PLAN YOUR VISIT</span>
+        <h1>Make yourself<br><em>at home.</em></h1>
+        <p>Tell us a little about what you need. We’ll get back to you to discuss availability, current rates and next steps.</p>
+        <a class="text-link" href="index.html">← Back to Sidai</a>
+        <div class="reservation-note"><span aria-hidden="true">✳</span><span>Sending an enquiry does not confirm a reservation. Your stay is confirmed only after availability and arrangements are agreed with Sidai.</span></div>
+      </section>
 
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
+      <section class="reservation-form-card" aria-labelledby="form-title">
+        <div class="form-heading">
+          <span class="eyebrow">ENQUIRY FORM</span>
+          <h2 id="form-title">How can we help?</h2>
+          <p class="form-description">Your contact details are required. Stay details are needed only for apartment enquiries.</p>
+        </div>
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        <form id="reservationForm" action="handle_reservation_simple.php" method="post">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="first_name">First name <span>*</span></label>
+              <input id="first_name" name="first_name" type="text" autocomplete="given-name" maxlength="80" required>
+            </div>
+            <div class="form-field">
+              <label for="last_name">Last name <span>*</span></label>
+              <input id="last_name" name="last_name" type="text" autocomplete="family-name" maxlength="80" required>
+            </div>
+            <div class="form-field">
+              <label for="email">Email address <span>*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone number <span>*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" required>
+            </div>
+            <div class="form-field form-field-full">
+              <label for="request_type">What are you enquiring about? <span>*</span></label>
+              <select id="request_type" name="request_type" required>
+                <option value="stay">An apartment stay</option>
+                <option value="food">Food options</option>
+                <option value="airport-pickup">Airport pickup</option>
+                <option value="general">Something else</option>
+              </select>
+            </div>
+            <div class="form-field stay-field">
+              <label for="check_in">Check-in</label>
+              <input id="check_in" name="check_in" type="date">
+            </div>
+            <div class="form-field stay-field">
+              <label for="check_out">Check-out</label>
+              <input id="check_out" name="check_out" type="date">
+            </div>
+            <div class="form-field stay-field">
+              <label for="property_type">Apartment type</label>
+              <select id="property_type" name="property_type">
+                <option value="">Select an option</option>
+                <option value="Studio">Studio</option>
+                <option value="1 Bedroom">One bedroom</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-field stay-field">
+              <label for="number_of_guests">Number of guests</label>
+              <input id="number_of_guests" name="number_of_guests" type="number" min="1" step="1" inputmode="numeric">
+            </div>
+            <div class="form-field form-field-full">
+              <label for="special_requests">A few more details</label>
+              <textarea id="special_requests" name="special_requests" maxlength="3000" placeholder="Share your dates, travel details or anything else that would help us plan."></textarea>
+            </div>
+          </div>
+          <button class="button button-dark form-submit" type="submit">Send enquiry <span aria-hidden="true">→</span></button>
+          <p class="form-footnote">Your details will be used to respond to this enquiry. Please don’t include payment information.</p>
+        </form>
+      </section>
+    </div>
+  </main>
 
-            // Show loading indicator
-            loading.style.display = 'block';
-            alert.style.display = 'none';
-
-            try {
-                const formData = new FormData(form);
-                const response = await fetch('handle_reservation_simple.php', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                loading.style.display = 'none';
-
-                if (data.success) {
-                    alert.className = 'alert alert-success';
-                    alert.innerHTML = `✓ <strong>${data.message}</strong><br><em>You will receive a confirmation email shortly.</em>`;
-                    alert.style.display = 'block';
-                    form.reset();
-                    // Scroll to top
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    alert.className = 'alert alert-error';
-                    alert.textContent = '✗ ' + (data.message || 'Submission failed');
-                    alert.style.display = 'block';
-                }
-            } catch (error) {
-                loading.style.display = 'none';
-                alert.className = 'alert alert-error';
-                alert.textContent = '✗ Error: ' + error.message + '. Please check your connection and try again.';
-                alert.style.display = 'block';
-                console.error('Booking error:', error);
-            }
-        });
-
-        // Set minimum check-in date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('check_in').setAttribute('min', today);
-        document.getElementById('check_out').setAttribute('min', today);
-    </script>
+  <footer class="site-footer reservation-footer">
+    <div class="page-width footer-bottom"><span>© <span id="year">2026</span> Sidai Furnished Homes</span><a href="index.html">Stay comfortably. Live beautifully.</a></div>
+  </footer>
 </body>
 </html>
